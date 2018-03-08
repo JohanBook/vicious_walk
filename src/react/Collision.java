@@ -1,3 +1,8 @@
+////////////////////////////////////////////////
+// Collision.java
+// Johan Book
+////////////////////////////////////////////////
+
 package react;
 
 import character.Character;
@@ -20,9 +25,5 @@ public class Collision {
 
 		// Else return false
 		return new Pair<Boolean, Character>(false, null);
-	}
-
-	// Simulate a fight between a and b
-	// Return the loser
-	
+	}	
 }
