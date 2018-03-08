@@ -9,5 +9,5 @@ A study of which role-playing character perform the best in single combat. Using
 <p align="center">
 <img src="https://raw.githubusercontent.com/JohanBook/vicious_walk/master/graph.png" alt="Graph">
 <br>
- <b>Figure 1</b>: Paladins seem to have a natural advantage.
+ <b>Figure 1</b>: The number of remaining characters of each class as a function of time.
 </p>
