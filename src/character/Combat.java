@@ -1,3 +1,7 @@
+// Combat.java
+// Ola Olson
+// 2015-10-03
+
 package character;
 
 import character.LevelUp;
