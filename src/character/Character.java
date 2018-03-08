@@ -1,3 +1,7 @@
+// Character.java
+// Ola Olsson
+// 2015-10-03
+
 package character;
 
 import java.awt.Color;
