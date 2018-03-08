@@ -1,3 +1,7 @@
+// Initializer.java
+// Ola Olsson
+// 2015-10-03
+
 package src;
 
 import java.util.ArrayList;
