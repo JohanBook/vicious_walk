@@ -114,7 +114,7 @@ public class Main {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		int numbSim = 1; // number of simulations to run
-		boolean useGUI = true; // whether to display GUI
+		boolean useGUI = false; // whether to display GUI
 		if (args.length >= 1) {
 			numbSim = Integer.parseInt(args[0]);
 			useGUI = false;
