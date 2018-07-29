@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import character.Class;
+import character.CharacterClass;
 
 // A class containing some useful tools
 public class Util {
@@ -88,10 +88,10 @@ public class Util {
 	}
 
 	// adds the values of b and a into a map c
-	public static Map<Class, Double> addMaps(Map<Class, Double> a,
-			Map<Class, Double> b) {
-		Map<Class, Double> c = new TreeMap<Class, Double>();
-		for (Class key : Class.values())
+	public static Map<CharacterClass, Double> addMaps(Map<CharacterClass, Double> a,
+			Map<CharacterClass, Double> b) {
+		Map<CharacterClass, Double> c = new TreeMap<CharacterClass, Double>();
+		for (CharacterClass key : CharacterClass.values())
 			c.put(key, a.get(key) + b.get(key));
 		return c;
 	}
@@ -110,16 +110,16 @@ public class Util {
 	}
 
 	// Initiate a map to keep record of densities
-	public static Map<Class, Double> initiateMap(double x0) {
-		Map<Class, Double> map = new TreeMap<Class, Double>();
-		for (Class type : Class.values())
+	public static Map<CharacterClass, Double> initiateMap(double x0) {
+		Map<CharacterClass, Double> map = new TreeMap<CharacterClass, Double>();
+		for (CharacterClass type : CharacterClass.values())
 			map.put(type, x0);
 		return map;
 	}
 	
-	public static Map<Class, Double> copyMap(Map<Class, Double> map) {
-		Map<Class, Double> copy = new TreeMap<Class, Double>();
-		for (Class key : Class.values())
+	public static Map<CharacterClass, Double> copyMap(Map<CharacterClass, Double> map) {
+		Map<CharacterClass, Double> copy = new TreeMap<CharacterClass, Double>();
+		for (CharacterClass key : CharacterClass.values())
 			copy.put(key, map.get(key));
 		return map;
 	}

@@ -16,8 +16,8 @@ public class Combat {
 
 		double[] position = new double[1];
 
-		Character attacker = new Character(Class.ROGUE, position);
-		Character defender = new Character(Class.RANGER, position);
+		Character attacker = new Character(CharacterClass.ROGUE, position);
+		Character defender = new Character(CharacterClass.RANGER, position);
 		// LevelUp.getLevelUpBonus(attacker, attacker.level);
 		// LevelUp.getLevelUpBonus(defender, defender.level);
 		// LevelUp.getLevelUpBonus(attacker, attacker.level);
@@ -25,15 +25,15 @@ public class Combat {
 		// attacker.heal();
 		// defender.heal();
 
-		System.out.println("Att: " + attacker.type + " " + attacker.level
+		System.out.println("Att: " + attacker.characterClass + " " + attacker.level
 				+ ", HP: " + attacker.current_hp + ", Max_HP: "
-				+ attacker.base_hp + ", HP/lvl: " + attacker.type.hp_per_level
+				+ attacker.base_hp + ", HP/lvl: " + attacker.characterClass.hp_per_level
 				+ ", STR: " + attacker.STR + ", DEX: " + attacker.DEX
 				+ ", CON: " + attacker.CON + ", WIS: " + attacker.WIS
 				+ ", INT: " + attacker.INT + ", CHA: " + attacker.CHA);
-		System.out.println("Def: " + defender.type + " " + defender.level
+		System.out.println("Def: " + defender.characterClass + " " + defender.level
 				+ ", HP: " + defender.current_hp + ", Max_HP: "
-				+ defender.base_hp + ", HP/lvl: " + defender.type.hp_per_level
+				+ defender.base_hp + ", HP/lvl: " + defender.characterClass.hp_per_level
 				+ ", STR: " + defender.STR + ", DEX: " + defender.DEX
 				+ ", CON: " + defender.CON + ", WIS: " + defender.WIS
 				+ ", INT: " + defender.INT + ", CHA: " + defender.CHA);
@@ -45,15 +45,15 @@ public class Combat {
 
 		boolean smite = false;
 		// Checks if paladin have bonus
-		if (attacker.type == Class.PALADIN
-				&& (defender.type == Class.SKELETON || defender.type == Class.ORC)) {
+		if (attacker.characterClass == CharacterClass.PALADIN
+				&& (defender.characterClass == CharacterClass.SKELETON || defender.characterClass == CharacterClass.ORC)) {
 			if (attacker.smiteEvil > 0) {
 				smite = true;
 				attacker.smiteEvil--;
 			}
 
-		} else if (defender.type == Class.PALADIN
-				&& (attacker.type == Class.SKELETON || attacker.type == Class.ORC)) {
+		} else if (defender.characterClass == CharacterClass.PALADIN
+				&& (attacker.characterClass == CharacterClass.SKELETON || attacker.characterClass == CharacterClass.ORC)) {
 			if (attacker.smiteEvil > 0) {
 				smite = true;
 				defender.smiteEvil--;
@@ -62,9 +62,9 @@ public class Combat {
 		// System.out.println("Smite: " + smite);
 		// System.out.println("Ranged");
 		// First strike if ranged attacker
-		if (attacker.type == Class.ROGUE)
+		if (attacker.characterClass == CharacterClass.ROGUE)
 			sneakAttack(attacker, defender);
-		else if (attacker.type.isRanged)
+		else if (attacker.characterClass.isRanged)
 			attack(attacker, defender, smite);
 
 		if (defender.isDead())
@@ -102,7 +102,7 @@ public class Combat {
 	private static Character Victory(Character alive, Character not_alive) {
 
 		// Cleric always gets full hp after combat
-		if (alive.type == Class.CLERIC)
+		if (alive.characterClass == CharacterClass.CLERIC)
 			alive.current_hp = alive.getMaxHP();
 		LevelUp.getLevelUpBonus(alive, alive.level);
 		return not_alive;
@@ -113,28 +113,28 @@ public class Combat {
 		int damage = 0;
 
 		// Check if cleric meets undead, uses Channel Energy above lvl 3
-		if (attack.type == Class.CLERIC && defend.type == Class.SKELETON
+		if (attack.characterClass == CharacterClass.CLERIC && defend.characterClass == CharacterClass.SKELETON
 				&& attack.level > 2) {
 			damage = dice(attack.channelEnergyDC);
-			// System.out.println(attack.type + ": Attacks Skeleton");
+			// System.out.println(attack.characterClass + ": Attacks Skeleton");
 		} else {
 
 			// Check Best Spell
-			if (attack.type == Class.WIZARD || attack.type == Class.CLERIC)
+			if (attack.characterClass == CharacterClass.WIZARD || attack.characterClass == CharacterClass.CLERIC)
 				for (int i = 5; i >= 0; i--) {
 					// System.out.println("Spells lvl "+i+": "+attack.Spellnumb[i]);
 					if (attack.Spellnumb[i] > 0) {
 						attack.Spellnumb[i]--;
-						// System.out.println(attack.type +
+						// System.out.println(attack.characterClass +
 						// ": Cast Spell lvl: "+ i);
 						// If Wiz Scorching Ray = touch
-						if (i == 2 && attack.type == Class.WIZARD) {
+						if (i == 2 && attack.characterClass == CharacterClass.WIZARD) {
 							if (d20() + (attack.DEX - 10) / 2 >= defend.Touch)
 								damage = dice(attack.Spell[i]);
 						}
 
 						// If Cleric Searing Light = touch
-						else if (i == 3 && attack.type == Class.CLERIC) {
+						else if (i == 3 && attack.characterClass == CharacterClass.CLERIC) {
 							if (d20() + (attack.DEX - 10) / 2 >= defend.Touch)
 								damage = dice(attack.Spell[i]);
 						} else {
@@ -149,17 +149,17 @@ public class Combat {
 					}
 				}
 			if (attackWeapon) {
-				// System.out.println(attack.type + ": Attacks with weapon");
+				// System.out.println(attack.characterClass + ": Attacks with weapon");
 				int attBonus;
 				int dmgBonus = 0;
 
-				if (attack.type.isRanged == true)
+				if (attack.characterClass.isRanged == true)
 					attBonus = (attack.DEX - 10) / 2;
 				else
 					attBonus = (attack.STR - 10) / 2;
 
 				// Checks if paladin have smite bonus
-				if (attack.type == Class.PALADIN && smite == true) {
+				if (attack.characterClass == CharacterClass.PALADIN && smite == true) {
 					attBonus += (attack.CHA - 10) / 2;
 					dmgBonus += attack.level;
 				}
@@ -180,7 +180,7 @@ public class Combat {
 				}
 			}
 			// Paladin heals with Lay On Hands
-			if (attack.type == Class.PALADIN
+			if (attack.characterClass == CharacterClass.PALADIN
 					&& attack.current_hp < attack.getMaxHP() - 6
 					&& attack.layOnHnadsnumb > 0) {
 				attack.layOnHnadsnumb--;
@@ -189,10 +189,10 @@ public class Combat {
 					attack.current_hp = attack.getMaxHP();
 			}
 		}
-		// System.out.println(defend.type + ", HP: " + defend.current_hp+
+		// System.out.println(defend.characterClass + ", HP: " + defend.current_hp+
 		// ", Takes damage: " + damage);
 		defend.current_hp -= damage;
-		// System.out.println(defend.type + ", HP: " + defend.current_hp);
+		// System.out.println(defend.characterClass + ", HP: " + defend.current_hp);
 	}
 
 	private static void sneakAttack(Character attack, Character defend) {
@@ -212,10 +212,10 @@ public class Combat {
 					damage = dice(attack.weaponDC) + (attack.STR - 10) / 2
 							+ dice(attack.sneakDC);
 		}
-		// System.out.println(defend.type + ", HP: " + defend.current_hp+
+		// System.out.println(defend.characterClass + ", HP: " + defend.current_hp+
 		// ", Takes damage: " + damage);
 		defend.current_hp -= damage;
-		// System.out.println(defend.type + ", HP: " + defend.current_hp);
+		// System.out.println(defend.characterClass + ", HP: " + defend.current_hp);
 	}
 
 	@SuppressWarnings("static-access")
